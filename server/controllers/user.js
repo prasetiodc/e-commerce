@@ -19,11 +19,19 @@ class User{
     }
 
     static login (req, res){
+
         Model.findOne({email:req.body.email})
         .then(found=>{
+
             if(compare(req.body.password, found.password)){
                 let jwt = sign({_id: found._id, name: found.name, email:found.email})
-                res.status(201).json({token: jwt})
+                
+                if(found.role){
+                    res.status(201).json({token: jwt, role : found.role})
+                }else{
+                    res.status(201).json({token: jwt})
+
+                }
             }
         })
     }

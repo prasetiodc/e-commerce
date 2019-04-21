@@ -12,9 +12,6 @@ class Product{
     }
 
     static create(req, res){
-        console.log("MASUK");
-        console.log(req.body);
-        
         let newProduct = new Model({
             name: req.body.name,
             image: req.file.cloudStoragePublicUrl,
@@ -23,7 +20,6 @@ class Product{
         })
         Model.create(newProduct)
         .then(data=>{
-            console.log("INPUT SUKSES");
             res.status(201).json(data)
         })
         .catch(err=>{

@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" v-if="!this.$store.state.islogin">
     <div id="box">
       <b-form method="POST" @submit.prevent="signup">
         <h1>Signup</h1>
@@ -28,33 +28,33 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   data() {
     return {
       name: '',
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
-    signup(){
-      let data = {
+    signup() {
+      const user = {
         name: this.name,
         email: this.email,
-        password: this.password
-      }
-      axios.post("http://localhost:3000/users", data)
-      .then(data=>{
-        console.log(data);
-      })
-      .catch(err=>{
-        console.log(err);
-        
-      })
-    }
-  }
+        password: this.password,
+      };
+      axios.post('http://localhost:3000/users', user)
+        .then(({ data }) => {
+          swal("Thanks to join Us!", "Register Success", "success");
+
+        })
+        .catch(({ err }) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 

@@ -16,9 +16,6 @@ const getPublicUrl = (filename) => {
 }
 
 const sendUploadToGCS = (req, res, next) => {
-  console.log("MASUK UPLOAD GCS");
-  console.log(req);
-  
   if (!req.file) {
     return next()
   }
@@ -40,9 +37,7 @@ const sendUploadToGCS = (req, res, next) => {
   stream.on('finish', () => {
     req.file.cloudStorageObject = gcsname
     file.makePublic().then(() => {
-      req.file.cloudStoragePublicUrl = getPublicUrl(gcsname)
-      console.log(req.file.cloudStoragePublicUrl);
-      
+      req.file.cloudStoragePublicUrl = getPublicUrl(gcsname)      
       next()
     })
   })

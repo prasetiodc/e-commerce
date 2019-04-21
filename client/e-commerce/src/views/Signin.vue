@@ -1,9 +1,9 @@
 <template>
-  <div id="container">
+  <div id="container" v-if="!this.$store.state.islogin">
     <div id="box">
       <h1>Sign in</h1>
       <!-- <b-form @submit="onSubmit" @reset="onReset"> -->
-      <b-form method="POST" @submit.prevent="signin">      
+      <b-form method="POST" @submit.prevent="signin">
         <b-form-group
           id="input-group-1"
           label="Email address:"
@@ -25,8 +25,7 @@
 
         <b-form-group id="input-group-4">
           <b-form-checkbox-group id="checkboxes-4">
-            <b-form-checkbox value="me">Check me out</b-form-checkbox>
-            <b-form-checkbox value="that">Check that out</b-form-checkbox>
+            <router-link to="/signup">Not registered?</router-link>
           </b-form-checkbox-group>
         </b-form-group>
         <b-button type="submit" variant="primary">Submit</b-button>
@@ -43,27 +42,33 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
-    signin(){
-      let data = {
+    signin() {
+      const user = {
         email: this.email,
-        password: this.password
-      }
-      axios.post("http://localhost:3000/users/login", data)
-      .then(data=>{
-        console.log(data);
-        console.log("LOGIN SUKSES");
-        
-      })
-      .catch(err=>{
-        console.log(err);
-        
-      })
-    }
-  }
+        password: this.password,
+      };
+      axios.post('http://localhost:3000/users/login', user)
+        .then(({data}) => {          
+          this.email = '',
+          this.password = '',
+          
+          localStorage.setItem('token', data.token);
+          this.$store.commit('setLogin', true);
+          if(data.role){
+            this.$store.commit('setAdmin', true);
+          }
+          swal("Welcome back!", "Login Success", "success");
+          this.$router.push('/');
+        })
+        .catch(({ err }) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 

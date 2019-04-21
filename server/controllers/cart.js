@@ -4,9 +4,9 @@ const Product = require('../models/product')
 class Cart{
     static create(req, res){
         //cek unique
-        Model.find({ $and: [{userId: req.body.userId}, {productId: req.body.productId}, {status: 0}]})
+        Model.find({ $and: [{userId: req.userId}, {productId: req.body.productId}, {status: 0}]})
         .then(data=>{
-            if(data){
+            if(data.length!=0){
                 data = data[0]
                 return Product.findById(req.body.productId)
                 .then(productFound=>{
@@ -19,7 +19,7 @@ class Cart{
                 return Product.findById(req.body.productId)
                 .then(data=>{
                     let newCart = new Model({
-                        userId: req.body.userId,
+                        userId: req.userId,
                         productId: req.body.productId,
                         quantity: 1,
                         totalPrice: data.price,
@@ -63,7 +63,7 @@ class Cart{
     }
 
     static findCart(req, res){
-        Model.find({ userId: req.params.id })
+        Model.find({ userId: req.userId })
         .populate('userId')
         .populate('productId')
         .then(data=>{
