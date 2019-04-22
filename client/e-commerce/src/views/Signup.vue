@@ -45,7 +45,7 @@ export default {
         email: this.email,
         password: this.password,
       };
-      axios.post('http://localhost:3000/users', user)
+      axios.post('http://localhost:3000/user', user)
         .then(({ data }) => {
           swal("Thanks to join Us!", "Register Success", "success");
 

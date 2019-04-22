@@ -4,7 +4,6 @@ const {sign, verify} = require('../helpers/jwt')
 
 function authentication(req, res, next){
     let decoded = verify(req.headers.auth);
-    
     User.findOne({email : decoded.email})
     .then(userFound=>{
         if(userFound){

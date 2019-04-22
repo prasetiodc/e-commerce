@@ -7,33 +7,12 @@ chai.use(chaiHttp);
 
 describe('User', function() {
     let id = null
-    // describe('GET / ', function() {
-    //     it('should return a array of object product', function(done) {
-    //         chai
-    //         .request(app)
-    //         .get('/products')
-    //         .end(function(err, res) {
-    //             res.body.should.be.a('array');
-
-    //             for(let i=0; i<res.body.length; i++){
-    //                 res.body[i].should.have.property('name');
-    //                 res.body[i].name.should.be.a('string');
-    //                 res.body[i].should.have.property('price');
-    //                 res.body[i].price.should.be.a('number');
-    //                 res.body[i].should.have.property('stock');
-    //                 res.body[i].stock.should.be.a('number');
-    //             }
-
-    //             done();                
-    //         });
-    //     });
-    // })
 
     describe('POST / ', function() {
-        it('should return a new object product', function(done) {
+        it('should return a new object user', function(done) {
             let newData ={ 
-                name: 'saya', 
-                email: 'saya@email.com',
+                name: 'g', 
+                email: 'g@email.com',
                 password: 'password'
             }
             chai
@@ -77,47 +56,17 @@ describe('User', function() {
         });
     })
 
-    
-
-    // describe('PUT /:id ', function() {
-    //     it('should return a new object product after update', function(done) {
-    //         let newData ={ 
-    //             name: 'roti coklat', 
-    //             price: 5000,
-    //             stock: 4 
-    //         }
-    //         chai
-    //         .request(app)
-    //         .put(`/products/${id}`)
-    //         .send(newData) 
-    //         .end(function(err, res) {
-    //             // should.not.exist(err)
-    //             res.body.should.be.a('object');
-    //             res.body.should.have.property('name');
-    //             res.body.name.should.be.a('string');
-    //             res.body.name.should.equal(newData.name)
-    //             res.body.should.have.property('price');
-    //             res.body.price.should.be.a('number');
-    //             res.body.price.should.equal(newData.price);
-    //             res.body.should.have.property('stock');
-    //             res.body.stock.should.be.a('number');
-    //             res.body.stock.should.equal(newData.stock);
-    //             done();                               
-    //         });
-    //     });
-    // }); 
-
-    // describe('DELETE /:id ', function() {
-    //     it('should return string "Delete Success"', function(done) {
-    //         chai
-    //         .request(app)
-    //         .delete(`/products/${id}`)
-    //         .end(function(err, res) {
-    //             res.body.should.equal("Delete Success");
-    //             done();                        // <= Call done to signal callback end
-    //         });
-    //     });
-    // });
+    describe('DELETE /:id ', function() {
+        it('should return string "Delete Success"', function(done) {
+            chai
+            .request(app)
+            .delete(`/users/${id}`)
+            .end(function(err, res) {
+                res.body.should.equal("Delete Success");
+                done();                        // <= Call done to signal callback end
+            });
+        });
+    });
 
 });
 

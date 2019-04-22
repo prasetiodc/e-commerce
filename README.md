@@ -1,14 +1,27 @@
 # e-commerce
 
 
+## Project setup
+```
+npm install
+```
+## Compiles
+
+```javascript
+-server
+npm run dev
+
+-client
+npm run serve
+```
+
 ## Routes Users
 |Routes|HTTP Method|Request|Response|Description| 
 |----|----|----|----|----|----|
 |/users  |POST  |fullname: String, email: String,  password: String |Success: {object},<br /> Error: Internal server error |Register a user|
 |/users/login  |POST  |email: String , password: String |Success: {object},<br/>Error: Internal server error |User login |
 |/users/:id  |GET  |id: String  |Success: {object}, <br />Error: Internal server error | User profile|
-|/users/:id/addCart  |GET  |id: String, productId: String  |Success: {object}, <br />Error: Internal server error | Add product to user cart|
-|/users/:id/buy  |GET  |id: String  |Success: {object}, <br />Error: Internal server error | Buy product in user cart|
+|/users/:id  |DELETE  |id: String  |Success: Delete Success (String), <br />Error: Internal server error | Delete a user|
 
 ## Routes Products
 |Routes|HTTP Method|Request|Response|Description|
@@ -22,13 +35,7 @@
 ## Routes Carts
 |Routes|HTTP Method|Request|Response|Description| 
 |----|----|----|----|----|----|
+|/cart  |GET  | token : String  |Success: [ {object} ], <br />Error: Internal server error | List cart  a user|
 |/cart  |POST  |userId: String, productId: String, quality: Number  |Success: {object}, <br />Error: Internal server error | Add product to user cart|
-|/cart | DELETE  |id : String |Success: Delete success,<br /> Error: Internal server error |Delete a cart|
-
-
-## Usage
-Make sure Node.js is installed in your computer then run these commands:
-
-```javascript
-npm install
-npm run dev
+|/cart/:id | DELETE  |id : String |Success: Delete success,<br /> Error: Internal server error |Delete a cart| 
+|/cart/:id | PUT  | id : String, userId: String, productId: String, quality: Number  |Success: {object},<br /> Error: Internal server error | Update a cart| 

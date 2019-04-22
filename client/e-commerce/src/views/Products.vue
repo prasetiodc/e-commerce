@@ -1,18 +1,5 @@
 <template>
   <div id="container">
-    <b-carousel
-        id="carousel-fade"
-        style="text-shadow: 0px 0px 2px #000; height: 400px; overflow: hidden;"
-        fade
-        controls
-        indicators
-        img-width="1024"
-        img-height="400"
-      >
-        <b-carousel-slide caption="" img-src="https://picsum.photos/1024/480/?image=10"></b-carousel-slide>
-        <b-carousel-slide caption="" img-src="https://picsum.photos/1024/480/?image=12"></b-carousel-slide>
-        <b-carousel-slide caption="" img-src="https://picsum.photos/1024/480/?image=22"></b-carousel-slide>
-      </b-carousel>
     <b-row class="text-center">
       <b-col cols="8" id="left">
         <div id="row">
@@ -27,7 +14,7 @@
           </b-card-group>
         </div>
       </b-col>
-      <b-col style="border: 3px solid black; padding: 20px;">
+      <b-col style="border: 1px solid black; padding: 20px;">
         <router-view></router-view>
       </b-col>
     </b-row>
@@ -58,7 +45,6 @@ export default {
 
 <style scoped>
 #left {
-  
 }
 .card-img-top {
   height: 150px;

@@ -45,6 +45,16 @@ class User{
             res.status(500).json(err)
         })
     }
+
+    static delete(req, res){
+        Model.findOneAndDelete({_id:req.params.id})
+        .then(data=>{
+            res.status(200).json("Delete Success")
+        })
+        .catch(err=>{
+            res.status(500).json(err)
+        })
+    }
 }
 
 module.exports = User

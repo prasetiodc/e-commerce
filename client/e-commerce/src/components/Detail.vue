@@ -60,7 +60,7 @@ export default {
       show: true
     }
   },
-  created() {
+  created(){
     axios
       .get('http://localhost:3000/products/'+this.$route.params.id)
       .then(({data}) => {
@@ -69,6 +69,17 @@ export default {
       .catch(err => {
         console.log(err);
       });
+  },
+  beforeRouteUpdate (to, from, next) {
+    axios
+      .get('http://localhost:3000/products/'+to.params.id)
+      .then(({data}) => {
+        this.product = data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+        next()
   },
   watch: {
     id(val){
